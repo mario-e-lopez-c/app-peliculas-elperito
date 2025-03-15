@@ -10,3 +10,8 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Steps creating the application
+1. Install react-router-dom in order to use pagination
+2. Create Login page, using components.
+3. Install ShadCN/UI library. This library provides pre-built components that look nice. This one is built on top of Radix UI and styled with Tailwind CSS.
