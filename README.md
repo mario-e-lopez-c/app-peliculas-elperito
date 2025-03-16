@@ -15,3 +15,5 @@ If you are developing a production application, we recommend using TypeScript an
 1. Install react-router-dom in order to use pagination
 2. Create Login page, using components.
 3. Install ShadCN/UI library. This library provides pre-built components that look nice. This one is built on top of Radix UI and styled with Tailwind CSS.
+4. Install Supabase SDK and configure
+5. Using Supabase to setup my internal DB, we have to disable RLS in order the table will be publicly readable and writable.
