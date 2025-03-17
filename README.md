@@ -17,3 +17,6 @@ If you are developing a production application, we recommend using TypeScript an
 3. Install ShadCN/UI library. This library provides pre-built components that look nice. This one is built on top of Radix UI and styled with Tailwind CSS.
 4. Install Supabase SDK and configure
 5. Using Supabase to setup my internal DB, we have to disable RLS in order the table will be publicly readable and writable.
+6. Create backend in order to create authentication with JWT.
+7. Instalar en el backend express y otras dependencias necesarias:
+    npm install express cors dotenv jsonwebtoken bcryptjs supabase

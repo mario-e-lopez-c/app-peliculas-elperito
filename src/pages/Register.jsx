@@ -1,57 +1,51 @@
-import { useState } from "react"
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
-export function Login() {
-    const [email, setEmail] =useState("");
-    const [password, setPassword]= useState("");
+export function Register() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         setError("");
+        setSuccess("");
 
         try {
-            const response = await fetch("http://localhost:5000/api/auth/login", {
+            const response = await fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email, password })
             });
 
             const data = await response.json();
 
-            if(!response.ok) {
-                throw new Error(data.error || "Login failed");
+            if (!response.ok) {
+                throw new Error(data.error || "Registration failed");
             }
 
-            // Guardar el token en localStorage
-            localStorage.setItem("token", data.token);
-
-            console.log("Login Successful!", data);
-            navigate("/home");
-        }catch (err){
-            setError(err.message);
+            setSuccess("User registered successfully! Redirecting...");
+            setTimeout(() => navigate("/login"), 2000);
+        } catch (error) {
+            setError(error.message);
         }
-        // if(email === "marioelopezc@gmail.com" && password === "pw12"){
-        //     console.log("Login Successful!");
-        //     navigate("/home");
-        // } else {
-        //     setError("Invalid email or password")
-        // }
-        // console.log("Loggin in with:", { email, password});
-    }
+    };
 
     return (
         <div className="flex h-screen items-center justify-center bg-blue-200 rounded-lg">
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleRegister}
                 className="bg-white p-8 rounded-lg shadow-md w-96 space-y-4"
             >
-                <h2 className="text-2xl font-bold text-center">Login</h2>
+                <h2 className="text-2xl font-bold text-center">Register</h2>
+
+                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                {success && <p className="text-green-500 text-sm text-center">{success}</p>}
 
                 <div className="space-y-2">
                     <Label>Email</Label>
@@ -61,7 +55,6 @@ export function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         required   
                     />
-
                 </div>
                 <div className="space-y-2">
                     <Label>Password</Label>
@@ -73,18 +66,10 @@ export function Login() {
                     />
                 </div>
 
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-
                 <Button type="submit" className="w-full">
-                    Login
+                    Register
                 </Button>
-
-                <p className="text-center text-sm">
-                    Don't have an account? <Link to="/register" className="text-blue-500">Register here</Link>
-                </p>
-            
             </form>
-        
         </div>
-    )
+    );
 }

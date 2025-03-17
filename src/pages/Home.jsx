@@ -66,14 +66,14 @@ export function Home() {
     const handleSearch = async (e) => {
         e.preventDefault();
         setPage(1); // Reset to first page when searching
-        await fetchMovies(); // 🟢 Ensure search updates immediately
+        await fetchMovies(); // Ensure search updates immediately
     };
 
     return (
         <div className="p-8 bg-gray-100 min-h-screen">
             <h1 className="text-3xl font-bold mb-4">🎬 Popular Movies</h1>
 
-            {/* 🔍 Search Bar */}
+            {/* Search Bar */}
             <form onSubmit={handleSearch} className="flex gap-2 mb-6">
                 <Input 
                     type="text"
@@ -84,7 +84,7 @@ export function Home() {
                 <Button type="submit">Search</Button>
             </form>
             
-            {/* 🖼️ Movie Grid */}
+            {/* Movie Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {movies.length > 0 ? (
                     movies.map((movie) => (
@@ -106,7 +106,7 @@ export function Home() {
                 )}
             </div>
 
-            {/* 📌 Pagination Controls */}
+            {/* Pagination Controls */}
             <div className="flex justify-center mt-6 space-x-4">
                 <Button
                     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
