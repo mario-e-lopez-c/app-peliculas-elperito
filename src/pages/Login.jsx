@@ -47,43 +47,45 @@ export function Login() {
 
     return (
         <div className="flex h-screen items-center justify-center bg-blue-200 rounded-lg">
-            <form
-                onSubmit={handleSubmit}
-                className="bg-white p-8 rounded-lg shadow-md w-96 space-y-4"
-            >
-                <h2 className="text-2xl font-bold text-center">Login</h2>
+            <div className="space-y-6 text-center">
+                <h1 className="text-3xl font-bold mb-6">🎬 Popular Movies</h1>
+                <form
+                    onSubmit={handleSubmit}
+                    className="bg-white p-8 rounded-lg shadow-md w-96 space-y-4"
+                >
+                    <h2 className="text-2xl font-bold text-center">Login</h2>
 
-                <div className="space-y-2">
-                    <Label>Email</Label>
-                    <Input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required   
-                    />
+                    <div className="space-y-2">
+                        <Label>Email</Label>
+                        <Input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required   
+                        />
 
-                </div>
-                <div className="space-y-2">
-                    <Label>Password</Label>
-                    <Input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label>Password</Label>
+                        <Input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                {error && <p className="text-red-500 text-sm">{error}</p>}
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
 
-                <Button type="submit" className="w-full">
-                    Login
-                </Button>
+                    <Button type="submit" className="w-full">
+                        Login
+                    </Button>
 
-                <p className="text-center text-sm">
-                    Don't have an account? <Link to="/register" className="text-blue-500">Register here</Link>
-                </p>
-            
-            </form>
+                    <p className="text-center text-sm">
+                        Don't have an account? <Link to="/register" className="text-blue-500">Register here</Link>
+                    </p>
+                </form>
+            </div>       
         
         </div>
     )

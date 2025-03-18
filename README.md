@@ -20,3 +20,6 @@ If you are developing a production application, we recommend using TypeScript an
 6. Create backend in order to create authentication with JWT.
 7. Instalar en el backend express y otras dependencias necesarias:
     npm install express cors dotenv jsonwebtoken bcryptjs supabase
+8. Credenciales de testeo registrados en supabase:
+    -mario@gmail.com / pw:0000
+    -juan@gmail.com / pw:1234

@@ -13,6 +13,7 @@ export function Home() {
     const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [selectedMovie, setSelectedMovie] = useState(null); //Estado para la pelicula seleccionada
 
     useEffect(() => {
         fetchMovies();
@@ -29,9 +30,11 @@ export function Home() {
     
             const tmdbResponse = await fetch(tmdbEndpoint);
             const tmdbData = await tmdbResponse.json();
+            console.log("Este es tmdbData: ", tmdbData.results)
             const tmdbMovies = tmdbData.results.map((movie) => ({
                 id: `tmdb-${movie.id}`,
                 title: movie.title,
+                description: movie.overview,
                 poster_url: movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "/no-image.jpg",
                 rating: movie.vote_average,
                 source: "TMDB"
@@ -88,7 +91,11 @@ export function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {movies.length > 0 ? (
                     movies.map((movie) => (
-                        <div key={movie.id} className="bg-white shadow-md rounded-lg p-4">
+                        <div 
+                            key={movie.id} 
+                            className="bg-white shadow-md rounded-lg p-4"
+                            onClick={() => setSelectedMovie(movie)} //Abre el modal al hacer clic
+                        >
                             <img
                                 src={movie.poster_url}
                                 alt={movie.title}
@@ -124,6 +131,42 @@ export function Home() {
                     Next ➡️
                 </Button>
             </div>
+
+            {/* Modal */}
+            {selectedMovie && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full relative flex">
+                        {/* Cerrar Modal */}
+                        <button 
+                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+                            onClick={() => setSelectedMovie(null)}
+                        >
+                            ❌
+                        </button>
+
+                        {/* Imagen a la izquierda */}
+                        <img 
+                            src={selectedMovie.poster_url} 
+                            alt={selectedMovie.title} 
+                            className="w-1/3 rounded-lg shadow-md"
+                        />
+
+                        {/* Detalles a la derecha */}
+                        <div className="w-2/3 pl-6">
+                            <h2 className="text-2xl font-bold">{selectedMovie.title}</h2>
+                            <p className="text-gray-600 mt-2">
+                                {selectedMovie.description || "No description available."}
+                            </p>
+                            <p className="text-gray-700 mt-4">
+                                ⭐ Rating: <span className="font-bold">{selectedMovie.rating || "N/A"}</span>
+                            </p>
+                            <p className="text-gray-700 mt-1">
+                                📅 Release Date: <span className="font-bold">{selectedMovie.release_date || "Unknown"}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
